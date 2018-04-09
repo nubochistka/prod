@@ -1,0 +1,25 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "php-fpm",
+      "host": {
+        "sourcePath": "/var/app/current/php-fpm"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "php-fpm",
+      "image": "krevetka/test",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ] 
+    }
+  ]
+}
