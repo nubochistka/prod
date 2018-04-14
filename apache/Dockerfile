@@ -46,6 +46,19 @@ RUN chmod 777 /var/www/html/sites/default/settings.php
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
+RUN apt-get update
+RUN apt-get install -y curl \
+      git \
+      wget \
+      zip unzip php5.6-zip
+
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer && \
+    composer require drush/drush && \
+    wget -O drush.phar https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar && \
+    chmod +x drush.phar && \
+    mv drush.phar /usr/local/bin/drush
+
 EXPOSE 80
 
 CMD /start.sh
